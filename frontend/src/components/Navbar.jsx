@@ -6,7 +6,7 @@ function Navbar() {
   return (
     <div className="h-20 w-full bg-[#1B80BF] flex justify-around items-center">
       <div className="flex w-[85%] justify-between items-center pl-10">
-        <h2 className="text-2xl text-[#F2F2F2]">[LOGO]</h2>
+        <h2 className="text-3xl text-[#F2F2F2] font-thin italic">HOKA</h2>
         <h4 className="text-[#F2F2F2]">HOMME</h4>
         <h4 className="text-[#F2F2F2]">FEMME</h4>
         <h4 className="text-[#F2F2F2]">ENFANT</h4>
