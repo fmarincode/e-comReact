@@ -25,6 +25,13 @@ class ProductManager extends AbstractManager {
       [Product.product_name, Product.id]
     );
   }
+
+  findBy(genre) {
+    return this.database.query(
+      `select * from  ${this.table} where product_genre = ?`,
+      [genre]
+    );
+  }
 }
 
 module.exports = ProductManager;

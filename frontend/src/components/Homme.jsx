@@ -24,14 +24,24 @@ function Homme() {
   return (
     <div className="h-[50vh]">
       <div className="flex flex-wrap">
-        {productsList.map((item) => (
-          <div className="w-48 h-60 p-4">
-            <img src={item.product_img} alt="running shoes" />
-            <h3>{item.product_name}</h3>
-            <h4>{item.product_price} €</h4>
-            <p>{item.product_type}</p>
-          </div>
-        ))}
+        {productsList ? (
+          productsList.map((item) => (
+            <div key={item.id} className="w-48 h-60 p-4">
+              <img src={item.product_img} alt="running shoes" />
+              <h3 className="text-lg font-medium text-[#2a2a38]">
+                {item.product_name}
+              </h3>
+              <h4 className="text-[0.9rem] font-medium text-[#2a2a38]">
+                {item.product_price} €
+              </h4>
+              <p className="text-[0.9rem] text-[#2a2a38]">
+                {item.product_type}
+              </p>
+            </div>
+          ))
+        ) : (
+          <p>&nbsp;</p>
+        )}
       </div>
     </div>
   );

@@ -28,6 +28,20 @@ const read = (req, res) => {
     });
 };
 
+const getbyGenre = (req, res) => {
+  const { product_genre } = req.query;
+
+  models.product
+    .findBy(product_genre)
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const edit = (req, res) => {
   const product = req.body;
 
@@ -85,6 +99,7 @@ const destroy = (req, res) => {
 module.exports = {
   browse,
   read,
+  getbyGenre,
   edit,
   add,
   destroy,

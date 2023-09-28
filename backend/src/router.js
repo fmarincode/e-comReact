@@ -5,6 +5,7 @@ const router = express.Router();
 const productControllers = require("./controllers/productControllers");
 
 router.get("/products", productControllers.browse);
+router.get("/products/genre", productControllers.getbyGenre);
 router.get("/products/:id", productControllers.read);
 router.put("/products/:id", productControllers.edit);
 router.post("/products", productControllers.add);
