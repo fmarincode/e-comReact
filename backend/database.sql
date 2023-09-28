@@ -34,12 +34,23 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecosport_db`.`product` (
   `idproduct` INT NOT NULL,
-  `productname` VARCHAR(100) NOT NULL,
-  `producttype` VARCHAR(100) NOT NULL,
-  `price` VARCHAR(100) NOT NULL,
+  `product_name` VARCHAR(100) NOT NULL,
+  `product_type` VARCHAR(100) NOT NULL,
+  `product_price` VARCHAR(100) NOT NULL,
+  `product_img` VARCHAR(255) NULL,
+  `product_genre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idproduct`))
 ENGINE = InnoDB;
 
+INSERT INTO product (idproduct, product_name, product_type, product_price, product_img, product_genre)
+ VALUES
+ (1, 'Clifton 9', 'Route', 150, "https://dms.deckers.com/hoka/image/upload/f_auto,q_auto,dpr_auto/b_rgb:f7f7f9/w_1110/v1677006261/HOKA%20Seasonal/SS23%20Photos/1127895-EPFR_1.png?_s=RAABAB0", "Homme"),
+ (2, 'Clifton 9 GORE-TEX', 'Route, Marche', 170, "https://dms.deckers.com/hoka/image/upload/f_auto,q_auto,dpr_auto/b_rgb:f7f7f9/w_1110/v1689108991/1141470-BBLC_1.png?_s=RAABAB0", "Homme"),
+ (3, 'Ironman Mach X', 'Route, Compétition', 180, "https://dms.deckers.com/hoka/image/upload/f_auto,q_auto,dpr_auto/b_rgb:f7f7f9/w_1110/v1694693211/EMEA/1154515-ABSSP_1.png?_s=RAABAB0", "Homme"),
+ (4, 'Carbon X 3', 'Route, Compétition', 180, "https://dms.deckers.com/hoka/image/upload/f_auto,q_auto,dpr_auto/b_rgb:f7f7f9/w_1110/v1664363027/catalog/images/transparent/1123192-BSEP_1.png?_s=RAABAB0", "Homme"),
+ (5, 'Arahi 6', 'Route, Marche', 150, "https://dms.deckers.com/hoka/image/upload/f_auto,q_auto,dpr_auto/b_rgb:f7f7f9/w_1110/v1683587929/1123194-BKSV_1.png?_s=RAABAB0", "Homme"),
+ (6, 'Rincon 3', 'Route, Compétition', 130, "https://dms.deckers.com/hoka/image/upload/f_auto,q_auto,dpr_auto/b_rgb:f7f7f9/w_1110/v1683587568/1119395-BDDV_1.png?_s=RAABAB0", "Homme"),
+ (7, 'Solimar', 'Route, Fitness', 120, "https://dms.deckers.com/hoka/image/upload/f_auto,q_auto,dpr_auto/b_rgb:f7f7f9/w_1110/v1674299225/catalog/images/transparent/1123074-BCBT_1.png?_s=RAABAB0", "Homme");
 
 -- -----------------------------------------------------
 -- Table `ecosport_db`.`product_has_account`
@@ -47,7 +58,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `ecosport_db`.`product_has_account` (
   `product_idproduct` INT NOT NULL,
   `account_idaccount` INT NOT NULL,
-  `buyingdate` DATETIME NULL,
+  `buying_date` DATETIME NULL,
   PRIMARY KEY (`product_idproduct`, `account_idaccount`),
   INDEX `fk_product_has_account_account1_idx` (`account_idaccount` ASC) VISIBLE,
   INDEX `fk_product_has_account_product_idx` (`product_idproduct` ASC) VISIBLE,
