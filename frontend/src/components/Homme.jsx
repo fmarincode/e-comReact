@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-function Catalog() {
+function Homme() {
   const [productsList, setProductsList] = useState();
 
   useEffect(() => {
@@ -37,4 +37,4 @@ function Catalog() {
   );
 }
 
-export default Catalog;
+export default Homme;
