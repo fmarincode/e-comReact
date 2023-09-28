@@ -23,10 +23,10 @@ function Catalog() {
 
   return (
     <div className="h-[50vh]">
-      <h2 className="text-2xl font-semibold text-center">
+      <h2 className="text-2xl font-semibold text-center mt-24">
         Chaussures de Running
       </h2>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap pt-4">
         {productsList ? (
           productsList.map((item) => (
             <div key={item.id} className="w-48 h-60 p-4">
