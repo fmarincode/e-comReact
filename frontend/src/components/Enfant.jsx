@@ -18,7 +18,7 @@ function Enfant() {
 
       .catch((error) => {
         console.error(
-          "Erreur lors de la récupération des détails de la recette de composition :",
+          "Erreur lors de la récupération des détails",
 
           error
         );
