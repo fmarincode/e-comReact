@@ -5,7 +5,7 @@ const ShoppingProduct = createContext(null);
 
 export function ShopProvider({ children }) {
   const [quantityArticle, setQuantityArticle] = useState(0);
-  const [articlesCard, setArticlesCard] = useState(null);
+  const [articlesCard, setArticlesCard] = useState([]);
   const contextValue = useMemo(
     () => ({
       quantityArticle,

@@ -7,6 +7,7 @@ import Enfant from "./components/Enfant";
 import ProductView from "./components/ProductView";
 import Cart from "./components/Cart";
 import { ShopProvider } from "./Context/ShoppingProduct";
+import SignIn from "./components/SignIn";
 import "./App.css";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/products/:id" element={<ProductView />} />
           <Route path="/enfant" element={<Enfant />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/signin" element={<SignIn />} />
         </Routes>
       </ShopProvider>
     </div>

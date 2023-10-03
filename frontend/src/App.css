@@ -1,3 +1,23 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+input {
+  width: 100%;
+  padding: 0.65rem 0.5rem;
+  font-size: 1rem;
+  color: white;
+  outline: none;
+}
+
+input:focus {
+  border-color: #4299e1;
+}
+
+input::placeholder {
+  color: #a0aec0;
+}
+
+button:disabled {
+  opacity: 0.35;
+}

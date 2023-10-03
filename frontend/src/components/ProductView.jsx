@@ -53,7 +53,7 @@ function ProductView() {
   const addProduct = (evt) => {
     evt.preventDefault();
     setQuantityArticle(quantityArticle + 1);
-    setArticlesCard({ ...articlesCard, productDetail });
+    setArticlesCard([...articlesCard, productDetail]);
   };
 
   return (
