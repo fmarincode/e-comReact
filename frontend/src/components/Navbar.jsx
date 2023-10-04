@@ -1,15 +1,25 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { BsCart } from "react-icons/bs";
 import { VscAccount } from "react-icons/vsc";
 import { FaBars, FaTimes } from "react-icons/fa";
+import ShoppingProduct from "../Context/ShoppingProduct";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
 
+  const { quantityArticle } = useContext(ShoppingProduct);
+
+  const navigate = useNavigate();
+
   const handleMenu = () => {
     setOpen(!open);
   };
+
+  const handleToCart = () => {
+    navigate("/cart");
+  };
+
   return (
     <div className="h-20 w-full bg-[#1B80BF] fixed top-0 pb-0 mb-0">
       <div className=" h-full flex flex-wrap justify-around items-center">
@@ -42,8 +52,14 @@ function Navbar() {
           </NavLink>
         </div>
         <div className="flex items-center space-x-5">
-          <BsCart className="text-2xl text-[#F2F2F2] font-semibold" />
           <VscAccount className="text-2xl text-[#F2F2F2] font-semibold" />
+          <BsCart
+            className="text-2xl text-[#F2F2F2] font-semibold"
+            onClick={handleToCart}
+          />
+          <span className="bg-[#f2f2f2] border rounded-[50%] px-[5px] -py-[1px] text-sm text-[#1B80BF] relative right-7 bottom-3">
+            {quantityArticle}
+          </span>
         </div>
       </div>
       {/* mobile menu */}

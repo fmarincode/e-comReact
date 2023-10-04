@@ -21,28 +21,34 @@ USE `ecosport_db` ;
 -- Table `ecosport_db`.`account`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecosport_db`.`account` (
-  `idaccount` INT NOT NULL,
+  `idaccount` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(255) NOT NULL,
-  `pwd` VARCHAR(100) NOT NULL,
+  `hashedPassword` VARCHAR(100) NOT NULL,
+  `firstname` VARCHAR(100) NOT NULL,
+  `lastname` VARCHAR(100) NOT NULL,
+  `phoneNumber` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`idaccount`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB;
 
+INSERT INTO account (idaccount, email, hashedPassword, firstname, lastname, phoneNumber)
+ VALUES
+ (1, 'florent@mail.fr', '$argon2id$v=19$m=65536,t=5,p=1$mjhH9dxoW9Y+TZ+H39sfXA$f/9myuRnhS+d6igPbIJ6nPGLoWl6yE1SoJlldZujZk0', "Florent", "Marin", "0658280334");
 
 -- -----------------------------------------------------
 -- Table `ecosport_db`.`product`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecosport_db`.`product` (
-  `idproduct` INT NOT NULL,
+  `id` INT NOT NULL,
   `product_name` VARCHAR(100) NOT NULL,
   `product_type` VARCHAR(100) NOT NULL,
   `product_price` VARCHAR(100) NOT NULL,
   `product_img` VARCHAR(255) NULL,
   `product_genre` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idproduct`))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-INSERT INTO product (idproduct, product_name, product_type, product_price, product_img, product_genre)
+INSERT INTO product (id, product_name, product_type, product_price, product_img, product_genre)
  VALUES
  (1, 'Clifton 9', 'Route', 150, "https://dms.deckers.com/hoka/image/upload/f_auto,q_auto,dpr_auto/b_rgb:f7f7f9/w_1110/v1677006261/HOKA%20Seasonal/SS23%20Photos/1127895-EPFR_1.png?_s=RAABAB0", "Homme"),
  (2, 'Clifton 9 GORE-TEX', 'Route, Marche', 170, "https://dms.deckers.com/hoka/image/upload/f_auto,q_auto,dpr_auto/b_rgb:f7f7f9/w_1110/v1689108991/1141470-BBLC_1.png?_s=RAABAB0", "Homme"),
@@ -67,15 +73,15 @@ INSERT INTO product (idproduct, product_name, product_type, product_price, produ
 -- Table `ecosport_db`.`product_has_account`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecosport_db`.`product_has_account` (
-  `product_idproduct` INT NOT NULL,
+  `product_id` INT NOT NULL,
   `account_idaccount` INT NOT NULL,
   `buying_date` DATETIME NULL,
-  PRIMARY KEY (`product_idproduct`, `account_idaccount`),
+  PRIMARY KEY (`product_id`, `account_idaccount`),
   INDEX `fk_product_has_account_account1_idx` (`account_idaccount` ASC) VISIBLE,
-  INDEX `fk_product_has_account_product_idx` (`product_idproduct` ASC) VISIBLE,
+  INDEX `fk_product_has_account_product_idx` (`product_id` ASC) VISIBLE,
   CONSTRAINT `fk_product_has_account_product`
-    FOREIGN KEY (`product_idproduct`)
-    REFERENCES `ecosport_db`.`product` (`idproduct`)
+    FOREIGN KEY (`product_id`)
+    REFERENCES `ecosport_db`.`product` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_product_has_account_account1`

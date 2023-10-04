@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Catalog() {
   const [productsList, setProductsList] = useState();
@@ -14,7 +15,7 @@ function Catalog() {
 
       .catch((error) => {
         console.error(
-          "Erreur lors de la récupération des détails de la recette de composition :",
+          "Erreur lors de la récupération des détails",
 
           error
         );
@@ -23,17 +24,22 @@ function Catalog() {
 
   return (
     <div className="h-[50vh]">
-      <h2 className="text-2xl font-semibold text-center">
-        Chaussures de Running
-      </h2>
-      <div className="flex flex-wrap">
+      <div className="flex flex-col items-center justify-start mt-20 h-10">
+        <h2 className="text-2xl font-semibold text-center w-full h-10">
+          Chaussures de Running
+        </h2>
+      </div>
+
+      <div className="flex flex-wrap pt-4">
         {productsList ? (
           productsList.map((item) => (
-            <div key={item.id} className="w-48 h-60 p-4">
+            <div key={item.idproduct} className="w-48 h-60 p-4">
               <img src={item.product_img} alt="running shoes" />
-              <h3 className="text-lg font-medium text-[#2a2a38]">
-                {item.product_name}
-              </h3>
+              <Link to={`/products/${item.id}`}>
+                <h3 className="text-lg font-medium text-[#2a2a38]">
+                  {item.product_name}
+                </h3>
+              </Link>
               <h4 className="text-[0.9rem] font-medium text-[#2a2a38]">
                 {item.product_price} €
               </h4>

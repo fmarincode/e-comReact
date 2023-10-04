@@ -1,0 +1,25 @@
+#email,
+#password,
+#confirmPassword {
+  width: 100%;
+  padding: 0.65rem 0.5rem;
+  font-size: 1rem;
+  color: rgb(0, 0, 0);
+  outline: none;
+}
+
+#email:focus,
+#password:focus,
+#confirmPassword:focus {
+  border-color: #4299e1;
+}
+
+#email::placeholder,
+#password::placeholder,
+#confirmPassword::placeholder {
+  color: #a0aec0;
+}
+
+#submitSignInBtn:disabled {
+  opacity: 0.35;
+}
