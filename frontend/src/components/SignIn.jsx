@@ -1,22 +1,33 @@
 import React from "react";
+import axios from "axios";
+import { Link, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
-import { basicSchema } from "../schemas";
+import { GiPadlock } from "react-icons/gi";
+import { signInSchema } from "../schemas";
+import "./signin.css";
 
 function SignIn() {
-  const onSubmit = async (actions) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    actions.resetForm();
+  const onSubmit = async (values, actions) => {
+    try {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/login`, values);
+
+      actions.resetForm();
+    } catch (error) {
+      console.error("Erreur lors de l'envoi des données :", error);
+    }
   };
 
   const formik = useFormik({
     initialValues: {
       email: "",
-      password: "",
+      pwd: "",
       confirmPassword: "",
     },
-    validationSchema: basicSchema,
+    validationSchema: signInSchema,
     onSubmit,
   });
+
+  const location = useLocation();
 
   return (
     <div className="mt-32 px-3">
@@ -26,7 +37,9 @@ function SignIn() {
           className="flex flex-col"
           onSubmit={formik.handleSubmit}
         >
-          <label htmlFor="email">Adresse e-mail</label>
+          <label htmlFor="email" className="pb-2 pl-2">
+            Adresse e-mail
+          </label>
           <input
             value={formik.values.email}
             onChange={formik.handleChange}
@@ -43,24 +56,26 @@ function SignIn() {
           {formik.errors.email && formik.touched.email && (
             <p className="text-[#bd5c5c]">{formik.errors.email}</p>
           )}
-          <label htmlFor="password">Mot de passe</label>
+          <label htmlFor="pwd" className="pb-2 pl-2">
+            Mot de passe
+          </label>
           <input
-            value={formik.values.password}
+            value={formik.values.pwd}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            id="password"
+            id="pwd"
             type="password"
             placeholder="Entrez votre mot de passe"
             className={`border-2 rounded-md ${
-              formik.errors.password && formik.touched.password
-                ? "border-[#bd5c5c]"
-                : ""
+              formik.errors.pwd && formik.touched.pwd ? "border-[#bd5c5c]" : ""
             }`}
           />
-          {formik.errors.password && formik.touched.password && (
-            <p className="text-[#bd5c5c]">{formik.errors.password}</p>
+          {formik.errors.pwd && formik.touched.pwd && (
+            <p className="text-[#bd5c5c]">{formik.errors.pwd}</p>
           )}
-          <label htmlFor="confirmPassword">Confirmer le mot de passe</label>
+          <label htmlFor="confirmPassword" className="pb-2 pl-2">
+            Confirmer le mot de passe
+          </label>
           <input
             value={formik.values.confirmPassword}
             onChange={formik.handleChange}
@@ -79,13 +94,22 @@ function SignIn() {
           )}
 
           <button
+            id="submitSignInBtn"
             type="submit"
             disabled={formik.isSubmitting}
-            className="bg-[#0477bf] text-[#F2F2F2] text-md font-medium border rounded-md px-24 py-2 mt-2 w-full"
+            className="text-[#F2F2F2] bg-[#0477bf] text-sm font-medium border rounded-md px-24 py-3 mt-3 w-full flex items-center justify-center"
           >
-            Sign In
+            <GiPadlock /> Se connecter
           </button>
         </form>
+        {location.pathname === "/signin" && (
+          <p className="mt-4 text-center">
+            Pas encore membre ?{" "}
+            <Link to="/register" className="font-semibold">
+              Création de compte
+            </Link>
+          </p>
+        )}
       </div>
     </div>
   );

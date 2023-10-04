@@ -8,6 +8,7 @@ import ProductView from "./components/ProductView";
 import Cart from "./components/Cart";
 import { ShopProvider } from "./Context/ShoppingProduct";
 import SignIn from "./components/SignIn";
+import Register from "./components/Register";
 import "./App.css";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/enfant" element={<Enfant />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </ShopProvider>
     </div>

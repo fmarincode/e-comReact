@@ -21,13 +21,19 @@ USE `ecosport_db` ;
 -- Table `ecosport_db`.`account`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecosport_db`.`account` (
-  `idaccount` INT NOT NULL,
+  `idaccount` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(255) NOT NULL,
-  `pwd` VARCHAR(100) NOT NULL,
+  `hashedPassword` VARCHAR(100) NOT NULL,
+  `firstname` VARCHAR(100) NOT NULL,
+  `lastname` VARCHAR(100) NOT NULL,
+  `phoneNumber` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`idaccount`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB;
 
+INSERT INTO account (idaccount, email, hashedPassword, firstname, lastname, phoneNumber)
+ VALUES
+ (1, 'florent@mail.fr', '$argon2id$v=19$m=65536,t=5,p=1$mjhH9dxoW9Y+TZ+H39sfXA$f/9myuRnhS+d6igPbIJ6nPGLoWl6yE1SoJlldZujZk0', "Florent", "Marin", "0658280334");
 
 -- -----------------------------------------------------
 -- Table `ecosport_db`.`product`
