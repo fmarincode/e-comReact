@@ -6,7 +6,7 @@ import { registerSchema } from "../schemas";
 import "./register.css";
 
 function Register() {
-  const [signFormDisplay, setSignFormDisplay] = useState(true);
+  const [signFormDisplay, setSignFormDisplay] = useState(false);
 
   const handleJoinUs = () => {
     setSignFormDisplay(false);

@@ -4,6 +4,7 @@ import { BsCart } from "react-icons/bs";
 import { VscAccount } from "react-icons/vsc";
 import { FaBars, FaTimes } from "react-icons/fa";
 import ShoppingProduct from "../Context/ShoppingProduct";
+import HoverAccount from "./HoverAccount";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -11,6 +12,8 @@ function Navbar() {
   const { quantityArticle } = useContext(ShoppingProduct);
 
   const navigate = useNavigate();
+
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleMenu = () => {
     setOpen(!open);
@@ -51,7 +54,11 @@ function Navbar() {
             ENFANT
           </NavLink>
         </div>
-        <div className="flex items-center space-x-5">
+        <div
+          className="flex items-center space-x-5"
+          onMouseEnter={() => setShowPopup(true)}
+          onMouseLeave={() => setShowPopup(false)}
+        >
           <VscAccount className="text-2xl text-[#F2F2F2] font-semibold" />
           <BsCart
             className="text-2xl text-[#F2F2F2] font-semibold"
@@ -60,6 +67,9 @@ function Navbar() {
           <span className="bg-[#f2f2f2] border rounded-[50%] px-[5px] -py-[1px] text-sm text-[#1B80BF] relative right-7 bottom-3">
             {quantityArticle}
           </span>
+          {showPopup && (
+            <HoverAccount onMouseEnter={() => setShowPopup(true)} />
+          )}
         </div>
       </div>
       {/* mobile menu */}

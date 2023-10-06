@@ -39,6 +39,11 @@ const ProductManager = require("./ProductManager");
 models.product = new ProductManager();
 models.product.setDatabase(pool);
 
+const WishListManager = require("./WishListManager");
+
+models.wishList = new WishListManager();
+models.wishList.setDatabase(pool);
+
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
 

@@ -39,7 +39,7 @@ INSERT INTO account (idaccount, email, hashedPassword, firstname, lastname, phon
 -- Table `ecosport_db`.`product`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecosport_db`.`product` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `product_name` VARCHAR(100) NOT NULL,
   `product_type` VARCHAR(100) NOT NULL,
   `product_price` VARCHAR(100) NOT NULL,
@@ -75,6 +75,7 @@ INSERT INTO product (id, product_name, product_type, product_price, product_img,
 CREATE TABLE IF NOT EXISTS `ecosport_db`.`product_has_account` (
   `product_id` INT NOT NULL,
   `account_idaccount` INT NOT NULL,
+  `product_quantity` INT NOT NULL,
   `buying_date` DATETIME NULL,
   PRIMARY KEY (`product_id`, `account_idaccount`),
   INDEX `fk_product_has_account_account1_idx` (`account_idaccount` ASC) VISIBLE,
@@ -91,6 +92,27 @@ CREATE TABLE IF NOT EXISTS `ecosport_db`.`product_has_account` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `ecosport_db`.`wishlist`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ecosport_db`.`wishlist` (
+  `wishlist_id` INT NOT NULL AUTO_INCREMENT,
+  `account_id` INT NOT NULL,
+  `product_id` INT NOT NULL,
+  PRIMARY KEY (`wishlist_id`,`product_id` ),
+  INDEX `fk_wishlist_product_idx` (`product_id` ASC) VISIBLE,
+  INDEX `fk_wishlist_wishlist_idx` (`wishlist_id` ASC) VISIBLE,
+  CONSTRAINT `fk_wishlist_product_idx`
+    FOREIGN KEY (`product_id`)
+    REFERENCES `ecosport_db`.`product` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+INSERT INTO wishlist (wishlist_id, account_id, product_id)
+ VALUES (1,1,4);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

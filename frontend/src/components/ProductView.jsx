@@ -11,9 +11,42 @@ function ProductView() {
 
   const { id } = useParams();
 
-  const { articlesCard, setArticlesCard } = useContext(ShoppingProduct);
-  const { quantityArticle, setQuantityArticle } = useContext(ShoppingProduct);
+  const {
+    articlesCard,
+    setArticlesCard,
+    quantityArticle,
+    setQuantityArticle,
+    wishList,
+    setWishList,
+    isLoggedIn,
+  } = useContext(ShoppingProduct);
 
+  const notifyLogged = () =>
+    toast.success(`Article ajouté !`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      style: {
+        background: "#4F4F59",
+        color: "#fff",
+        maxWidth: "80%",
+        left: "50%",
+        top: "80px",
+      },
+    });
+
+  /* add to wishList the product onclick */
+  const addToWishList = () => {
+    setWishList([...wishList, productDetail]);
+    notifyLogged();
+  };
+
+  /* get the productDetails with the id */
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/products/${id}`)
@@ -31,24 +64,15 @@ function ProductView() {
       });
   }, []);
 
-  const notifyLogged = () =>
-    toast.success("Article ajouté !", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      style: {
-        background: "#4F4F59",
-        color: "#fff",
-        maxWidth: "80%",
-        left: "50%",
-        top: "80px",
-      },
-    });
+  /* post the id product & the account id in wishlist */
+  useEffect(() => {
+    if (productDetail && isLoggedIn && isLoggedIn.idaccount) {
+      axios.post(`${import.meta.env.VITE_BACKEND_URL}/wishlist`, {
+        account_id: isLoggedIn.idaccount,
+        product_id: productDetail.id,
+      });
+    }
+  }, [wishList]);
 
   const addProduct = (evt) => {
     evt.preventDefault();
@@ -117,7 +141,7 @@ function ProductView() {
               <button
                 type="button"
                 className="rounded-md border-2 border-zinc-950 py-3 px-4 ml-2"
-                onClick={() => notifyLogged()}
+                onClick={() => addToWishList()}
               >
                 {" "}
                 <AiOutlineHeart className="text-[#0477BF]" />{" "}
