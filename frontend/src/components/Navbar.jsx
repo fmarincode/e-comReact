@@ -3,13 +3,14 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { BsCart } from "react-icons/bs";
 import { VscAccount } from "react-icons/vsc";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { MdLogout } from "react-icons/md";
 import ShoppingProduct from "../Context/ShoppingProduct";
 import HoverAccount from "./HoverAccount";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
 
-  const { quantityArticle } = useContext(ShoppingProduct);
+  const { quantityArticle, isLoggedIn } = useContext(ShoppingProduct);
 
   const navigate = useNavigate();
 
@@ -39,7 +40,7 @@ function Navbar() {
         </div>
         <NavLink
           to="/"
-          className="text-4xl text-[#F2F2F2] font-semibold italic md:pl-16 md:pr-16"
+          className="text-4xl text-[#F2F2F2] pl-6 font-semibold italic md:pl-16 md:pr-16"
         >
           HOKA
         </NavLink>
@@ -55,15 +56,30 @@ function Navbar() {
           </NavLink>
         </div>
         <div
-          className="flex items-center space-x-5"
+          className="flex items-center space-x-5 md:w-60 pl-10"
           onMouseEnter={() => setShowPopup(true)}
           onMouseLeave={() => setShowPopup(false)}
         >
-          <VscAccount className="text-2xl text-[#F2F2F2] font-semibold" />
-          <BsCart
-            className="text-2xl text-[#F2F2F2] font-semibold"
+          <div className="h-[5vh] w-[3wh] flex justify-center items-center">
+            {!isLoggedIn.email ? (
+              <VscAccount className="text-2xl text-[#F2F2F2] font-semibold" />
+            ) : (
+              <MdLogout className="text-2xl text-[#F2F2F2] font-semibold" />
+            )}
+          </div>
+          <div
+            className="h-[5vh] w-[3wh] flex justify-center items-center"
+            role="button" // Ajout de l'attribut role pour indiquer que c'est un élément interactif
             onClick={handleToCart}
-          />
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === "Space") {
+                handleToCart();
+              }
+            }}
+            tabIndex={0} // Rend l'élément focusable
+          >
+            <BsCart className="text-2xl text-[#F2F2F2] font-semibold" />
+          </div>
           <span className="bg-[#f2f2f2] border rounded-[50%] px-[5px] -py-[1px] text-sm text-[#1B80BF] relative right-7 bottom-3">
             {quantityArticle}
           </span>
