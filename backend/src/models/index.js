@@ -44,6 +44,11 @@ const WishListManager = require("./WishListManager");
 models.wishList = new WishListManager();
 models.wishList.setDatabase(pool);
 
+const ShoppingCartManager = require("./ShoppingCartManager");
+
+models.shopping_cart = new ShoppingCartManager();
+models.shopping_cart.setDatabase(pool);
+
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
 

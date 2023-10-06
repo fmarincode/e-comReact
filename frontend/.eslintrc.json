@@ -22,6 +22,7 @@
     "react/no-array-index-key": "off",
     "no-promise-executor-return": "off",
     "react/no-unstable-nested-components": "warn",
+    "no-nested-ternary": "warn",
     "react/jsx-no-bind": "warn",
     "no-restricted-syntax": [
       "error",

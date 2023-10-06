@@ -43,4 +43,14 @@ router.get("/wishList/:id", wishListControllers.read);
 router.post("/wishList", wishListControllers.add);
 router.delete("/wishList/:account_id/:product_id", wishListControllers.destroy);
 
+const shoppingCartControllers = require("./controllers/shoppingCartControllers");
+
+router.get("/cart", shoppingCartControllers.browse);
+router.get("/cart/:id", shoppingCartControllers.read);
+router.post("/cart", shoppingCartControllers.add);
+router.delete(
+  "/cart/:account_idaccount/:product_id",
+  shoppingCartControllers.destroy
+);
+
 module.exports = router;

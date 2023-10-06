@@ -21,6 +21,13 @@ function Wishes() {
   const [matchedProducts, setMatchedProducts] = useState([]);
 
   const addToCart = (item) => {
+    if (isLoggedIn.email !== "") {
+      axios.post(`${import.meta.env.VITE_BACKEND_URL}/cart`, {
+        product_id: item.id,
+        account_idaccount: isLoggedIn.idaccount,
+        product_quantity: 1,
+      });
+    }
     setQuantityArticle(quantityArticle + 1);
     setArticlesCard([...articlesCard, item]);
   };
@@ -69,18 +76,35 @@ function Wishes() {
             isLoggedIn.idaccount
           }/${productId}`
         )
+        .then(() => {
+          // Mettre à jour userList après la suppression réussie
+          const updatedUserList = userList.filter(
+            (userItem) => userItem.product_id !== productId
+          );
+          setUserList(updatedUserList);
+
+          // Mettre à jour matchedProducts en conséquence
+          const updatedMatchedProducts = matchedProducts.filter(
+            (matchedItem) => matchedItem.id !== productId
+          );
+          setMatchedProducts(updatedMatchedProducts);
+
+          // Si l'utilisateur est connecté, ne rien faire avec la liste de souhaits locale
+        })
         .catch((error) => {
           console.error("Error deleting product from the database:", error);
         });
     } else {
+      // Si l'utilisateur n'est pas connecté, supprimer l'élément de la liste de souhaits locale
       const updatedWishList = wishList.filter((item) => item.id !== productId);
       setWishList(updatedWishList);
-    }
 
-    const updatedMatchedProducts = matchedProducts.filter(
-      (matchedItem) => matchedItem.id !== productId
-    );
-    setMatchedProducts(updatedMatchedProducts);
+      // Mettre à jour matchedProducts en conséquence
+      const updatedMatchedProducts = matchedProducts.filter(
+        (matchedItem) => matchedItem.id !== productId
+      );
+      setMatchedProducts(updatedMatchedProducts);
+    }
   };
 
   function CustomPrevArrow({ handlePrev }) {
@@ -159,7 +183,7 @@ function Wishes() {
           prevArrow={CustomPrevArrow}
           nextArrow={CustomNextArrow}
         >
-          {isLoggedIn.idaccount !== ""
+          {isLoggedIn.idaccount !== "" && matchedProducts.length > 0
             ? matchedProducts.map((item, index) => (
                 <div
                   key={index}

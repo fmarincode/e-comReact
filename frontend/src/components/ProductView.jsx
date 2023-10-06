@@ -42,7 +42,14 @@ function ProductView() {
 
   /* add to wishList the product onclick */
   const addToWishList = () => {
-    setWishList([...wishList, productDetail]);
+    if (isLoggedIn.email === "") {
+      setWishList([...wishList, productDetail]);
+    } else if (productDetail && isLoggedIn && isLoggedIn.idaccount) {
+      axios.post(`${import.meta.env.VITE_BACKEND_URL}/wishlist`, {
+        account_id: isLoggedIn.idaccount,
+        product_id: productDetail.id,
+      });
+    }
     notifyLogged();
   };
 
@@ -64,20 +71,17 @@ function ProductView() {
       });
   }, []);
 
-  /* post the id product & the account id in wishlist */
-  useEffect(() => {
-    if (productDetail && isLoggedIn && isLoggedIn.idaccount) {
-      axios.post(`${import.meta.env.VITE_BACKEND_URL}/wishlist`, {
-        account_id: isLoggedIn.idaccount,
-        product_id: productDetail.id,
-      });
-    }
-  }, [wishList]);
-
   const addProduct = (evt) => {
     evt.preventDefault();
     setQuantityArticle(quantityArticle + 1);
     setArticlesCard([...articlesCard, productDetail]);
+    if (isLoggedIn.email !== "") {
+      axios.post(`${import.meta.env.VITE_BACKEND_URL}/cart`, {
+        product_id: productDetail.id,
+        account_idaccount: isLoggedIn.idaccount,
+        product_quantity: 1,
+      });
+    }
   };
 
   return (
@@ -91,11 +95,11 @@ function ProductView() {
         rtl={false}
         pauseOnFocusLoss
         draggable
-        pauseOnHover
+        pauseOnHover={false}
         theme="colored"
       />
 
-      <div className="h-[50vh] pl-2">
+      <div className="h-[50vh] pl-2 md:flex md:justify-center md:mx-28 md:mt-32">
         {productDetail ? (
           <>
             <p className="mt-24">
@@ -111,7 +115,11 @@ function ProductView() {
             <p className="">
               Chaussure de running pour {productDetail.product_genre}
             </p>
-            <img src={productDetail.product_img} alt="running shoes" />
+            <img
+              src={productDetail.product_img}
+              alt="running shoes"
+              className="md:h-3/4 md:-order-1"
+            />
             <p className="text-sm ">
               Ou paiement en 3 versements sans intérêts de{" "}
               {Math.round(productDetail.product_price / 3)} €

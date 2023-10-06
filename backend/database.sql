@@ -70,28 +70,30 @@ INSERT INTO product (id, product_name, product_type, product_price, product_img,
  (18, 'Ora Recovery Slide 3', 'Récupération', 50, "https://dms.deckers.com/hoka/image/upload/f_auto,q_auto,dpr_auto/b_rgb:f7f7f9/w_1110/v1681488816/1134471-CSVO_1.png?_s=RAABAB0", "Enfant");
 
 -- -----------------------------------------------------
--- Table `ecosport_db`.`product_has_account`
+-- Table `ecosport_db`.`shopping_cart`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ecosport_db`.`product_has_account` (
+CREATE TABLE IF NOT EXISTS `ecosport_db`.`shopping_cart` (
   `product_id` INT NOT NULL,
   `account_idaccount` INT NOT NULL,
   `product_quantity` INT NOT NULL,
   `buying_date` DATETIME NULL,
   PRIMARY KEY (`product_id`, `account_idaccount`),
-  INDEX `fk_product_has_account_account1_idx` (`account_idaccount` ASC) VISIBLE,
-  INDEX `fk_product_has_account_product_idx` (`product_id` ASC) VISIBLE,
-  CONSTRAINT `fk_product_has_account_product`
+  INDEX `fk_shopping_cart_account1_idx` (`account_idaccount` ASC) VISIBLE,
+  INDEX `fk_shopping_cart_product_idx` (`product_id` ASC) VISIBLE,
+  CONSTRAINT `fk_shopping_cart_product`
     FOREIGN KEY (`product_id`)
     REFERENCES `ecosport_db`.`product` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_product_has_account_account1`
+  CONSTRAINT `fk_shopping_cart_account1`
     FOREIGN KEY (`account_idaccount`)
     REFERENCES `ecosport_db`.`account` (`idaccount`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+INSERT INTO shopping_cart (product_id, account_idaccount, product_quantity)
+ VALUES (4,1,2);
 
 -- -----------------------------------------------------
 -- Table `ecosport_db`.`wishlist`
