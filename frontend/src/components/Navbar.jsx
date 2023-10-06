@@ -5,7 +5,7 @@ import { VscAccount } from "react-icons/vsc";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
 import ShoppingProduct from "../Context/ShoppingProduct";
-import HoverAccount from "./HoverAccount";
+import PopupAccount from "./PopupAccount";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -26,7 +26,7 @@ function Navbar() {
 
   return (
     <div className="h-20 w-full bg-[#1B80BF] fixed top-0 pb-0 mb-0">
-      <div className=" h-full flex flex-wrap justify-around items-center">
+      <div className="h-full flex flex-wrap justify-around items-center">
         {/* hamburger btn */}
         <div className="md:hidden pt-2">
           <button type="button" onClick={handleMenu}>
@@ -38,6 +38,7 @@ function Navbar() {
             )}
           </button>
         </div>
+        {/* end hamburger btn */}
         <NavLink
           to="/"
           className="text-4xl text-[#F2F2F2] pl-6 font-semibold italic md:pl-16 md:pr-16"
@@ -56,37 +57,53 @@ function Navbar() {
           </NavLink>
         </div>
         <div
-          className="flex items-center space-x-5 md:w-60 pl-10"
-          onMouseEnter={() => setShowPopup(true)}
-          onMouseLeave={() => setShowPopup(false)}
+          className="flex items-center space-x-5 pl-10"
+          onClick={() => setShowPopup(!showPopup)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === "Space") {
+              setShowPopup(!showPopup);
+            }
+          }}
+          role="button"
+          tabIndex={0}
         >
-          <div className="h-[5vh] w-[3wh] flex justify-center items-center">
+          <div className="h-full w-[3wh] flex justify-center items-center">
             {!isLoggedIn.email ? (
-              <VscAccount className="text-2xl text-[#F2F2F2] font-semibold" />
+              <VscAccount className="text-2xl text-[#F2F2F2] font-semibold cursor-pointer" />
             ) : (
-              <MdLogout className="text-2xl text-[#F2F2F2] font-semibold" />
+              <MdLogout className="text-2xl text-[#F2F2F2] font-semibold cursor-pointer" />
             )}
           </div>
-          <div
-            className="h-[5vh] w-[3wh] flex justify-center items-center"
-            role="button" // Ajout de l'attribut role pour indiquer que c'est un élément interactif
-            onClick={handleToCart}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === "Space") {
-                handleToCart();
-              }
-            }}
-            tabIndex={0} // Rend l'élément focusable
-          >
-            <BsCart className="text-2xl text-[#F2F2F2] font-semibold" />
-          </div>
-          <span className="bg-[#f2f2f2] border rounded-[50%] px-[5px] -py-[1px] text-sm text-[#1B80BF] relative right-7 bottom-3">
-            {quantityArticle}
-          </span>
           {showPopup && (
-            <HoverAccount onMouseEnter={() => setShowPopup(true)} />
+            <PopupAccount onMouseEnter={() => setShowPopup(true)} />
           )}
         </div>
+        <div
+          className="h-full w-[3wh] flex justify-center items-center"
+          role="button" // Ajout de l'attribut role pour indiquer que c'est un élément interactif
+          onClick={handleToCart}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === "Space") {
+              handleToCart();
+            }
+          }}
+          tabIndex={0} // Rend l'élément focusable
+        >
+          <BsCart className="text-2xl text-[#F2F2F2] font-semibold" />
+        </div>
+        <span
+          className="bg-[#f2f2f2] border rounded-[50%] px-[5px] -py-[1px] text-sm text-[#1B80BF] relative right-7 bottom-3 md:right-14"
+          onClick={handleToCart}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === "Space") {
+              handleToCart();
+            }
+          }}
+          role="button" // Ajout de l'attribut role pour indiquer que c'est un élément interactif
+          tabIndex={0} // Rend l'élément focusable
+        >
+          {quantityArticle}
+        </span>
       </div>
       {/* mobile menu */}
       {open ? (

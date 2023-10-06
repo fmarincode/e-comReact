@@ -25,7 +25,7 @@ function Homme() {
   }, []);
 
   return (
-    <div className="h-[50vh]">
+    <div className="h-[50vh] md:mx-28">
       <h2 className="text-2xl font-semibold text-center mt-24">
         Chaussures de Running Homme
       </h2>
@@ -33,8 +33,8 @@ function Homme() {
         {productsList ? (
           productsList.map((item) => (
             <div key={item.idproduct} className="w-48 h-60 p-4">
-              <img src={item.product_img} alt="running shoes" />
               <Link to={`/products/${item.id}`}>
+                <img src={item.product_img} alt="running shoes" />
                 <h3 className="text-lg font-medium text-[#2a2a38]">
                   {item.product_name}
                 </h3>

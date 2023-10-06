@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { GiPadlock } from "react-icons/gi";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,7 +12,7 @@ import "./signin.css";
 function SignIn() {
   const { setIsLoggedIn, isLoggedIn } = useContext(ShoppingProduct);
   const location = useLocation();
-
+  const navigate = useNavigate();
   const [success, setSuccess] = useState(false);
 
   const onSubmit = async (values, actions) => {
@@ -21,12 +21,12 @@ function SignIn() {
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}/login`, values);
 
       // Réinitialiser le formulaire et mettre à jour l'email dans le contexte
-      actions.resetForm();
       setIsLoggedIn((prevLoggedIn) => ({
         ...prevLoggedIn,
         email: values.email,
       }));
       setSuccess(true);
+      actions.resetForm();
     } catch (error) {
       console.error("Erreur lors de l'envoi des données :", error);
     }
@@ -50,24 +50,29 @@ function SignIn() {
             lastname: response.data?.lastname,
             phoneNumber: response.data?.phoneNumber,
           }));
+          setTimeout(() => {
+            navigate("/");
+          }, 3500);
 
-          toast.success(`Bonjour ${response.data?.firstname} !`, {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            style: {
-              background: "#4F4F59",
-              color: "#fff",
-              maxWidth: "80%",
-              left: "50%",
-              top: "80px",
-            },
-          });
+          if (isLoggedIn.email !== "") {
+            toast.success(`Bonjour ${response.data?.firstname} !`, {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              style: {
+                background: "#4F4F59",
+                color: "#fff",
+                maxWidth: "80%",
+                left: "50%",
+                top: "80px",
+              },
+            });
+          }
         })
         .catch((err) => {
           console.error(err);

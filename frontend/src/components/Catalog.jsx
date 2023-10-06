@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import ShoppingProduct from "../Context/ShoppingProduct";
 
 function Catalog() {
   const [productsList, setProductsList] = useState();
+  const { setQuantityArticle, isLoggedIn } = useContext(ShoppingProduct);
 
   useEffect(() => {
     axios
@@ -22,8 +24,18 @@ function Catalog() {
       });
   }, []);
 
+  useEffect(() => {
+    if (isLoggedIn.email !== "") {
+      axios
+        .get(`${import.meta.env.VITE_BACKEND_URL}/cart/${isLoggedIn.idaccount}`)
+        .then((response) => {
+          setQuantityArticle(response.data.length || 0);
+        });
+    }
+  }, []);
+
   return (
-    <div className="h-[50vh]">
+    <div className="h-[50vh] md:mx-28">
       <div className="flex flex-col items-center justify-start mt-20 h-10">
         <h2 className="text-2xl font-semibold text-center w-full h-10">
           Chaussures de Running
@@ -34,8 +46,8 @@ function Catalog() {
         {productsList ? (
           productsList.map((item) => (
             <div key={item.idproduct} className="w-48 h-60 p-4">
-              <img src={item.product_img} alt="running shoes" />
               <Link to={`/products/${item.id}`}>
+                <img src={item.product_img} alt="running shoes" />
                 <h3 className="text-lg font-medium text-[#2a2a38]">
                   {item.product_name}
                 </h3>
