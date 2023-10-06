@@ -6,14 +6,36 @@ const ShoppingProduct = createContext(null);
 export function ShopProvider({ children }) {
   const [quantityArticle, setQuantityArticle] = useState(0);
   const [articlesCard, setArticlesCard] = useState([]);
+  const [wishList, setWishList] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState({
+    idaccount: "",
+    email: "",
+    firstname: "",
+    lastname: "",
+    phoneNumber: "",
+  });
+
   const contextValue = useMemo(
     () => ({
       quantityArticle,
       setQuantityArticle,
       articlesCard,
       setArticlesCard,
+      wishList,
+      setWishList,
+      isLoggedIn,
+      setIsLoggedIn,
     }),
-    [quantityArticle, setQuantityArticle, articlesCard, setArticlesCard]
+    [
+      quantityArticle,
+      setQuantityArticle,
+      articlesCard,
+      setArticlesCard,
+      wishList,
+      setWishList,
+      isLoggedIn,
+      setIsLoggedIn,
+    ]
   );
 
   return (

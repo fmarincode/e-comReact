@@ -21,6 +21,8 @@
     "camelcase": "off",
     "react/no-array-index-key": "off",
     "no-promise-executor-return": "off",
+    "react/no-unstable-nested-components": "warn",
+    "react/jsx-no-bind": "warn",
     "no-restricted-syntax": [
       "error",
       {

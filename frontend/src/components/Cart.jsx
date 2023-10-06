@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BsCart } from "react-icons/bs";
 import { ImBin } from "react-icons/im";
@@ -9,8 +10,15 @@ import ShoppingProduct from "../Context/ShoppingProduct";
 import "react-toastify/dist/ReactToastify.css";
 
 function Cart() {
-  const { quantityArticle, setQuantityArticle, articlesCard, setArticlesCard } =
-    useContext(ShoppingProduct);
+  const {
+    quantityArticle,
+    setQuantityArticle,
+    articlesCard,
+    setArticlesCard,
+    isLoggedIn,
+    setWishList,
+    wishList,
+  } = useContext(ShoppingProduct);
 
   const [quantity, setQuantity] = useState(1);
 
@@ -47,6 +55,19 @@ function Cart() {
         top: "80px",
       },
     });
+
+  const addToWish = (item) => {
+    if (articlesCard && isLoggedIn && isLoggedIn.idaccount) {
+      axios.post(`${import.meta.env.VITE_BACKEND_URL}/wishlist`, {
+        account_id: isLoggedIn.idaccount,
+        product_id: item.id,
+      });
+    } else {
+      setWishList([...wishList, item]);
+    }
+
+    notifyLogged();
+  };
 
   return (
     <>
@@ -134,12 +155,12 @@ function Cart() {
                       <div className="flex flex-row items-center">
                         <AiOutlineHeart
                           className="text-sm"
-                          onClick={() => notifyLogged()}
+                          onClick={() => addToWish(item)}
                         />
                         <button
                           type="button"
                           className="underline font-medium"
-                          onClick={() => notifyLogged()}
+                          onClick={() => addToWish(item)}
                         >
                           Ajouter à ma liste de souhaits
                         </button>

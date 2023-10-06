@@ -9,6 +9,7 @@ import Cart from "./components/Cart";
 import { ShopProvider } from "./Context/ShoppingProduct";
 import SignIn from "./components/SignIn";
 import Register from "./components/Register";
+import Wishes from "./components/Wishes";
 import "./App.css";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/wishes" element={<Wishes />} />
         </Routes>
       </ShopProvider>
     </div>
