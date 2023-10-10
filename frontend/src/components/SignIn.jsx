@@ -107,82 +107,90 @@ function SignIn() {
         theme="colored"
       />
 
-      <div className="mt-32 px-3">
-        <div className="px-5">
+      <div className="px-4 mt-5">
+        <div>
           <form
             autoComplete="off"
-            className="flex flex-col"
+            className="flex flex-col md:flex-row md:flex-wrap md:space-y-2 md:mb-6 "
             onSubmit={formik.handleSubmit}
           >
-            <label htmlFor="email" className="pb-2 pl-2">
-              Adresse e-mail
-            </label>
-            <input
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              id="email"
-              type="email"
-              placeholder="Entrez votre adresse email"
-              className={`border-2 rounded-md ${
-                formik.errors.email && formik.touched.email
-                  ? "border-[#bd5c5c]"
-                  : ""
-              }`}
-            />
-            {formik.errors.email && formik.touched.email && (
-              <p className="text-[#bd5c5c]">{formik.errors.email}</p>
-            )}
-            <label htmlFor="pwd" className="pb-2 pl-2">
-              Mot de passe
-            </label>
-            <input
-              value={formik.values.pwd}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              id="pwd"
-              type="password"
-              placeholder="Entrez votre mot de passe"
-              className={`border-2 rounded-md ${
-                formik.errors.pwd && formik.touched.pwd
-                  ? "border-[#bd5c5c]"
-                  : ""
-              }`}
-            />
-            {formik.errors.pwd && formik.touched.pwd && (
-              <p className="text-[#bd5c5c]">{formik.errors.pwd}</p>
-            )}
-            <label htmlFor="confirmPassword" className="pb-2 pl-2">
-              Confirmer le mot de passe
-            </label>
-            <input
-              value={formik.values.confirmPassword}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              id="confirmPassword"
-              type="password"
-              placeholder="Confirmez votre mot de passe"
-              className={`border-2 rounded-md ${
-                formik.errors.confirmPassword && formik.touched.confirmPassword
-                  ? "border-[#bd5c5c]"
-                  : ""
-              }`}
-            />
-            {formik.errors.confirmPassword &&
-              formik.touched.confirmPassword && (
-                <p className="text-[#bd5c5c]">
-                  {formik.errors.confirmPassword}
-                </p>
+            <div className="md:w-full">
+              <label htmlFor="email" className="pb-2 pl-2">
+                Adresse e-mail
+              </label>
+              <input
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                id="email"
+                type="email"
+                placeholder="Entrez votre adresse email"
+                className={`border-2 rounded-md ${
+                  formik.errors.email && formik.touched.email
+                    ? "border-[#bd5c5c]"
+                    : ""
+                }`}
+              />
+              {formik.errors.email && formik.touched.email && (
+                <p className="text-[#bd5c5c]">{formik.errors.email}</p>
               )}
-
-            <button
-              id="submitSignInBtn"
-              type="submit"
-              disabled={formik.isSubmitting}
-              className="text-[#F2F2F2] bg-[#0477bf] text-sm font-medium border rounded-md px-24 py-3 mt-3 w-full flex items-center justify-center"
-            >
-              <GiPadlock /> Se connecter
-            </button>
+            </div>
+            <div className="md:w-full">
+              <label htmlFor="pwd" className="pb-2 pl-2">
+                Mot de passe
+              </label>
+              <input
+                value={formik.values.pwd}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                id="pwd"
+                type="password"
+                placeholder="Entrez votre mot de passe"
+                className={`border-2 rounded-md ${
+                  formik.errors.pwd && formik.touched.pwd
+                    ? "border-[#bd5c5c]"
+                    : ""
+                }`}
+              />
+              {formik.errors.pwd && formik.touched.pwd && (
+                <p className="text-[#bd5c5c]">{formik.errors.pwd}</p>
+              )}
+            </div>
+            <div className="md:w-full">
+              <label htmlFor="confirmPassword" className="pb-2 pl-2">
+                Confirmer le mot de passe
+              </label>
+              <input
+                value={formik.values.confirmPassword}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                id="confirmPassword"
+                type="password"
+                placeholder="Confirmez votre mot de passe"
+                className={`border-2 rounded-md ${
+                  formik.errors.confirmPassword &&
+                  formik.touched.confirmPassword
+                    ? "border-[#bd5c5c]"
+                    : ""
+                }`}
+              />
+              {formik.errors.confirmPassword &&
+                formik.touched.confirmPassword && (
+                  <p className="text-[#bd5c5c]">
+                    {formik.errors.confirmPassword}
+                  </p>
+                )}
+            </div>
+            <div className="md:w-full md:flex md:justify-center">
+              <button
+                id="submitSignInBtn"
+                type="submit"
+                disabled={formik.isSubmitting}
+                className="text-[#F2F2F2] bg-[#0477bf] text-sm font-medium border rounded-md px-24 py-3 mt-3 w-full flex items-center justify-center md:w-3/4"
+              >
+                <GiPadlock /> Se connecter
+              </button>
+            </div>
           </form>
           {location.pathname === "/signin" && (
             <p className="mt-4 text-center">

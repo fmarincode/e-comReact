@@ -35,11 +35,11 @@ function Homme() {
             <div key={item.idproduct} className="w-48 h-60 p-4">
               <Link to={`/products/${item.id}`}>
                 <img src={item.product_img} alt="running shoes" />
-                <h3 className="text-lg font-medium text-[#2a2a38]">
+                <h3 className="text-lg font-semibold text-[#2a2a38]">
                   {item.product_name}
                 </h3>
               </Link>
-              <h4 className="text-[0.9rem] font-medium text-[#2a2a38]">
+              <h4 className="text-[0.9rem] font-semibold text-[#2a2a38]">
                 {item.product_price} €
               </h4>
               <p className="text-[0.9rem] text-[#2a2a38]">

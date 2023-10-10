@@ -4,6 +4,7 @@ import { Carousel, IconButton } from "@material-tailwind/react";
 import { FaTimes } from "react-icons/fa";
 import axios from "axios";
 import ShoppingProduct from "../Context/ShoppingProduct";
+import Register from "./Register";
 
 function Wishes() {
   const {
@@ -169,63 +170,86 @@ function Wishes() {
   };
 
   return (
-    <div className="mt-32 flex flex-col px-3">
+    <div className="mt-32 flex flex-col px-3 md:items-center">
       <p className="text-sm">
         Si vous ne vous connectez pas, vos listes seront uniquement disponibles
         sur cet appareil et expireront à la fin de cette session.
       </p>
-      <section className="mt-3 flex flex-col border-2 ">
+      <section className="mt-3 flex flex-col border-2 md:w-[35vw] md:h-[50vh]">
         <h3 className="h-8 bg-[#F2F2F2] pl-5 text-[#4F4F59]">
           MA LISTE D'ENVIES
         </h3>
-        <Carousel
-          className="rounded-xl"
-          prevArrow={CustomPrevArrow}
-          nextArrow={CustomNextArrow}
-        >
-          {isLoggedIn.idaccount !== "" && matchedProducts.length > 0
-            ? matchedProducts.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col items-center justify-center"
-                >
-                  <FaTimes
-                    className="relative top-4 left-40 text-[#1B80BF]"
-                    onClick={() => {
-                      deleteProduct(item.id);
-                    }}
-                  />
-                  <img src={item.product_img} alt={item.product_name} />
-                  <h3>{item.product_name}</h3>
-                  <h3 className="font-semibold">
-                    {item.product_price} € | 2 couleurs
-                  </h3>
-                  <button type="button" onClick={() => addToCart(item)}>
-                    Ajouter au panier
-                  </button>
-                </div>
-              ))
-            : wishList.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col items-center justify-center"
-                >
-                  <FaTimes
-                    className="relative top-4 left-40 text-[#1B80BF]"
-                    onClick={() => deleteProduct(item.id)}
-                  />
-                  <img src={item.product_img} alt={item.product_name} />
-                  <h3>{item.product_name}</h3>
-                  <h3 className="font-semibold">
-                    {item.product_price} € | 2 couleurs
-                  </h3>
-                  <button type="button" onClick={() => addToCart(item)}>
-                    Ajouter au panier
-                  </button>
-                </div>
-              ))}
-        </Carousel>
+        {matchedProducts.length > 0 || wishList.length > 0 ? (
+          <Carousel
+            className="rounded-xl"
+            prevArrow={CustomPrevArrow}
+            nextArrow={CustomNextArrow}
+          >
+            {isLoggedIn.idaccount !== "" && matchedProducts.length > 0
+              ? matchedProducts.map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col items-center justify-center"
+                  >
+                    <FaTimes
+                      className="relative top-4 left-40 text-[#1B80BF] md:left-80"
+                      onClick={() => {
+                        deleteProduct(item.id);
+                      }}
+                    />
+                    <img
+                      src={item.product_img}
+                      alt={item.product_name}
+                      className="md:w-1/2 md:z-10"
+                    />
+                    <h3 className="md:mt-2">{item.product_name}</h3>
+                    <h3 className="font-semibold">
+                      {item.product_price} € | 2 couleurs
+                    </h3>
+                    <button
+                      type="button"
+                      onClick={() => addToCart(item)}
+                      className="underline"
+                    >
+                      Ajouter au panier
+                    </button>
+                  </div>
+                ))
+              : wishList.map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col items-center justify-center"
+                  >
+                    <FaTimes
+                      className="relative top-4 left-40 text-[#1B80BF] md:left-80"
+                      onClick={() => deleteProduct(item.id)}
+                    />
+                    <img
+                      src={item.product_img}
+                      alt={item.product_name}
+                      className="md:w-1/2 md:z-10"
+                    />
+                    <h3 className="md:mt-2">{item.product_name}</h3>
+                    <h3 className="font-semibold">
+                      {item.product_price} € | 2 couleurs
+                    </h3>
+                    <button
+                      type="button"
+                      onClick={() => addToCart(item)}
+                      className="underline"
+                    >
+                      Ajouter au panier
+                    </button>
+                  </div>
+                ))}
+          </Carousel>
+        ) : (
+          <h2 className="text-center md:mt-2">La liste est vide</h2>
+        )}
       </section>
+      <div className="md:w-[36.4vw] md:-mt-24">
+        <Register />
+      </div>
     </div>
   );
 }
