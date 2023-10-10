@@ -325,7 +325,7 @@ function Cart() {
             <button
               type="button"
               className="bg-[#0477bf] text-[#F2F2F2] text-[12px] font-medium border rounded-md px-24 py-3 w-full md:w-1/4"
-              onClick={() => navigate("/signin")}
+              onClick={() => navigate("/register")}
             >
               Sign In
             </button>

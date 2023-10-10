@@ -107,8 +107,8 @@ function SignIn() {
         theme="colored"
       />
 
-      <div className="mt-32 px-3 md:mt-20">
-        <div className="px-5">
+      <div className="px-4 mt-5">
+        <div>
           <form
             autoComplete="off"
             className="flex flex-col md:flex-row md:flex-wrap md:space-y-2 md:mb-6 "

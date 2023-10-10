@@ -71,8 +71,8 @@ function Register() {
         pauseOnHover
         theme="colored"
       />
-      <div className="md:flex md:justify-center md:items-center">
-        <div className="border flex flex-col justify-center items-center mt-32 mx-3 md:w-[40vw]">
+      <div className=" mt-5 md:flex md:justify-center md:items-center">
+        <div className="border flex flex-col justify-center items-center mt-20 mx-3 md:w-[40vw]">
           <section className="flex flex-row w-full pt-6 pb-2 px-4">
             <button
               type="button"
@@ -98,17 +98,17 @@ function Register() {
             </button>
           </section>
           <hr className="w-[91%] h-1 border-b-2 bg-gray-600" />
-          <section className="-mt-24 md:-mt-10">
+          <section className="h-[75vh]">
             {signFormDisplay ? (
               <SignIn />
             ) : (
-              <div className="mt-32 md:mt-20">
+              <div className="mt-5 md:mt-20">
                 <form
                   autoComplete="off"
                   className="flex flex-col md:flex-row md:flex-wrap md:space-y-4 md:mb-6"
                   onSubmit={formik.handleSubmit}
                 >
-                  <div className="md:flex md:flex-row md:px-4 md:w-full">
+                  <div className=" md:flex md:flex-row px-4 md:w-full">
                     <div className="md:flex-col md:mr-4 md:w-full">
                       <label htmlFor="firstname" className="pb-2 pl-2">
                         Prénom
@@ -132,7 +132,7 @@ function Register() {
                         </p>
                       )}
                     </div>
-                    <div className="md:flex-col md:w-full">
+                    <div className=" md:flex-col md:w-full">
                       <label htmlFor="lastname" className="pb-2 pl-2">
                         Nom
                       </label>
@@ -156,7 +156,7 @@ function Register() {
                       )}
                     </div>
                   </div>
-                  <div className="md:flex-col md:w-full md:px-4">
+                  <div className="md:flex-col md:w-full px-4">
                     <label htmlFor="email" className="pb-2 pl-2 ">
                       Adresse e-mail
                     </label>
@@ -177,7 +177,7 @@ function Register() {
                       <p className="text-[#bd5c5c]">{formik.errors.email}</p>
                     )}
                   </div>
-                  <div className="md:flex-col md:w-full md:px-4">
+                  <div className="md:flex-col md:w-full px-4">
                     <label htmlFor="pwd" className="pb-2 pl-2">
                       Mot de passe
                     </label>
@@ -198,7 +198,7 @@ function Register() {
                       <p className="text-[#bd5c5c]">{formik.errors.pwd}</p>
                     )}
                   </div>
-                  <div className="md:flex-col md:w-full md:px-4">
+                  <div className="md:flex-col md:w-full px-4">
                     <label htmlFor="phoneNumber" className="pb-2 pl-2 ">
                       Numéro de téléphone
                     </label>
@@ -222,12 +222,12 @@ function Register() {
                         </p>
                       )}
                   </div>
-                  <div className="md:w-full md:flex md:justify-center">
+                  <div className="w-full flex justify-center">
                     <button
                       id="submitSignInBtn"
                       type="submit"
                       disabled={formik.isSubmitting}
-                      className="text-[#F2F2F2] bg-[#0477bf] text-sm font-medium border rounded-md px-24 py-3 mt-3 w-full flex items-center justify-center mb-4 md:w-3/4"
+                      className="text-[#F2F2F2] bg-[#0477bf] text-sm font-medium border rounded-md px-24 py-3 mt-3 flex items-center justify-center mb-4 w-10/12"
                     >
                       Nous rejoindre
                     </button>
