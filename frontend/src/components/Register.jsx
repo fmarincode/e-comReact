@@ -76,7 +76,7 @@ function Register() {
           <section className="flex flex-row w-full pt-6 pb-2 px-4">
             <button
               type="button"
-              className={`${
+              className={` md:cursor-pointer ${
                 signFormDisplay
                   ? "border-b-4 pb-4 w-1/2 border-[#1B80BF]"
                   : "w-1/2 pb-4 border-b-4 border-white"
@@ -87,7 +87,7 @@ function Register() {
             </button>
             <button
               type="button"
-              className={`${
+              className={` md:cursor-pointer ${
                 !signFormDisplay
                   ? "border-b-4 pb-4 w-1/2 border-[#1B80BF]"
                   : "w-1/2 pb-4 border-b-4 border-white"
@@ -98,11 +98,11 @@ function Register() {
             </button>
           </section>
           <hr className="w-[91%] h-1 border-b-2 bg-gray-600" />
-          <section className="-mt-24">
+          <section className="-mt-24 md:-mt-10">
             {signFormDisplay ? (
               <SignIn />
             ) : (
-              <div className="mt-32">
+              <div className="mt-32 md:mt-20">
                 <form
                   autoComplete="off"
                   className="flex flex-col md:flex-row md:flex-wrap md:space-y-4 md:mb-6"
