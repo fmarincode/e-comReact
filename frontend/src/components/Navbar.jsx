@@ -25,7 +25,7 @@ function Navbar() {
   };
 
   return (
-    <div className="h-20 w-full bg-[#1B80BF] fixed top-0 pb-0 mb-0">
+    <div className="h-20 w-full bg-[#1B80BF] fixed top-0 pb-0 mb-0 z-50">
       <div className="h-full flex flex-wrap justify-around items-center">
         {/* hamburger btn */}
         <div className="md:hidden pt-2">
