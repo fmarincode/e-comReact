@@ -126,32 +126,37 @@ function Cart() {
               {userCart.map((item, index) => (
                 <div
                   key={index}
-                  className="flex flex-row flex-wrap border-gray-200 border-2 px-2 mt-2 w-full"
+                  className="flex flex-row flex-wrap border-gray-200 border-2 px-2 mt-2 w-full md:mx-10 md:w-3/4"
                 >
-                  <p className="w-full">{item.product_name}</p>
+                  <p className="w-full md:font-semibold md:pl-2 md:py-2">
+                    {item.product_name}
+                  </p>
                   <img
                     src={item.product_img}
-                    className="w-36 h-36"
+                    className="w-36 h-36 md:ml-1"
                     alt="running shoes"
                   />
-                  <div className="flex flex-col px-2">
+                  <div className="flex flex-col px-2 md:ml-1">
                     <p>{item.product_genre}</p>
                     <p>Color Details...</p>
                     <p>Size Details...</p>
                   </div>
-                  <div className="flex flex-col border-gray-200 border-2 border-t-0 px-2 w-full pb-2">
+                  <div className="flex flex-col border-gray-200 border-2 border-t-0 px-2 w-full pb-2 md:border-none md:w-auto md:ml-64">
                     <div className="flex flex-row justify-around items-center text-center">
                       <div className="flex flex-col">
-                        <p className="font-medium">Prix unitaire</p>
+                        <p className="font-medium md:font-semibold">
+                          Prix unitaire
+                        </p>
                         <p>{item.product_price} €</p>
                       </div>
-                      <div className="flex flex-col">
-                        <p className="font-medium">Quantité</p>
+                      <div className="flex flex-col md:ml-64">
+                        <p className="font-medium md:font-semibold">Quantité</p>
                         <select
                           name="numbers"
                           value={articleQuantities[item.id] || ""}
                           onChange={(event) => handleChange(event, item.id)}
                           style={{ display: "block" }}
+                          className="md:w-48 md:border md:py-2"
                         >
                           <option value="" label="Select">
                             Select
@@ -167,15 +172,15 @@ function Cart() {
                           ))}
                         </select>
                       </div>
-                      <div className="flex flex-col">
-                        <p className="font-medium">Total</p>
-                        <p className="font-medium">
+                      <div className="flex flex-col md:ml-64">
+                        <p className="font-medium md:font-semibold">Total</p>
+                        <p className="font-medium md:font-semibold md:py-2">
                           {articleQuantities[item.id] * item.product_price || 0}{" "}
                           €
                         </p>
                       </div>
                     </div>
-                    <div className="flex flex-row justify-around">
+                    <div className="flex flex-row justify-around md:justify-normal md:pt-10">
                       <div className="flex flex-row items-center">
                         <ImBin className="text-sm" />
                         <button
@@ -186,7 +191,7 @@ function Cart() {
                           Enlever
                         </button>
                       </div>
-                      <div className="flex flex-row items-center">
+                      <div className="flex flex-row items-center md:ml-64">
                         <AiOutlineHeart
                           className="text-sm"
                           onClick={() => addToWish(item)}
@@ -203,10 +208,10 @@ function Cart() {
                   </div>
                 </div>
               ))}
-              <div className="h-20 w-full bottom-0 pb-0 mb-0 px-2">
+              <div className="h-20 w-full bottom-0 pb-0 mb-0 px-2 md:w-1/2 md:border-2 md:px-2 md:mt-5">
                 <button
                   type="button"
-                  className="text-[#F2F2F2] bg-[#0477bf] text-md font-medium border rounded-md px-24 py-3 w-full flex items-center justify-center"
+                  className="text-[#F2F2F2] bg-[#0477bf] text-md font-medium border rounded-md px-24 py-3 w-full flex items-center justify-center md:mt-4"
                 >
                   <GiPadlock className="text-[#f2f2f2]" /> Paiement
                 </button>
@@ -217,32 +222,37 @@ function Cart() {
           articlesCard.map((item, index) => (
             <div
               key={index}
-              className="flex flex-row flex-wrap border-gray-200 border-2 px-2 mt-2 w-full"
+              className="flex flex-row flex-wrap border-gray-200 border-2 px-2 mt-2 w-full md:mx-10 md:w-3/4"
             >
-              <p className="w-full">{item.product_name}</p>
+              <p className="w-full md:font-semibold md:pl-2 md:py-2">
+                {item.product_name}
+              </p>
               <img
                 src={item.product_img}
-                className="w-36 h-36"
+                className="w-36 h-36 md:ml-1"
                 alt="running shoes"
               />
-              <div className="flex flex-col px-2">
+              <div className="flex flex-col px-2 md:ml-1">
                 <p>{item.product_genre}</p>
                 <p>Color Details...</p>
                 <p>Size Details...</p>
               </div>
-              <div className="flex flex-col border-gray-200 border-2 border-t-0 px-2 w-full pb-2">
+              <div className="flex flex-col border-gray-200 border-2 border-t-0 px-2 w-full pb-2 md:border-none md:w-auto md:ml-64">
                 <div className="flex flex-row justify-around items-center text-center">
                   <div className="flex flex-col">
-                    <p className="font-medium">Prix unitaire</p>
-                    <p>{item.product_price} €</p>
+                    <p className="font-medium md:font-semibold">
+                      Prix unitaire
+                    </p>
+                    <p className="md:py-2">{item.product_price} €</p>
                   </div>
-                  <div className="flex flex-col">
-                    <p className="font-medium">Quantité</p>
+                  <div className="flex flex-col md:ml-64">
+                    <p className="font-medium md:font-semibold">Quantité</p>
                     <select
                       name="numbers"
                       value={articleQuantities[item.id] || ""}
                       onChange={(event) => handleChange(event, item.id)}
                       style={{ display: "block" }}
+                      className="md:w-48 md:border md:py-2"
                     >
                       <option value="" label="Select">
                         Select
@@ -258,14 +268,14 @@ function Cart() {
                       ))}
                     </select>
                   </div>
-                  <div className="flex flex-col">
-                    <p className="font-medium">Total</p>
-                    <p className="font-medium">
+                  <div className="flex flex-col md:ml-64">
+                    <p className="font-medium md:font-semibold">Total</p>
+                    <p className="font-medium md:font-semibold md:py-2">
                       {articleQuantities[item.id] * item.product_price || 0} €
                     </p>
                   </div>
                 </div>
-                <div className="flex flex-row justify-around">
+                <div className="flex flex-row justify-around md:justify-normal md:pt-10">
                   <div className="flex flex-row items-center">
                     <ImBin className="text-sm" />
                     <button
@@ -276,7 +286,7 @@ function Cart() {
                       Enlever
                     </button>
                   </div>
-                  <div className="flex flex-row items-center">
+                  <div className="flex flex-row items-center md:ml-64">
                     <AiOutlineHeart
                       className="text-sm"
                       onClick={() => addToWish(item)}
@@ -290,10 +300,10 @@ function Cart() {
                     </button>
                   </div>
                 </div>
-                <div className="h-20 w-full bottom-0 pb-0 mb-0 px-2">
+                <div className="h-20 w-full bottom-0 pb-0 mb-0 px-2 md:relative md:left-[47vw] md:w-1/2 md:-top-[10.5rem] md:border-2 md:px-2 md:h-20">
                   <button
                     type="button"
-                    className="text-[#F2F2F2] bg-[#0477bf] text-md font-medium border rounded-md px-24 py-3 w-full flex items-center justify-center"
+                    className="text-[#F2F2F2] bg-[#0477bf] text-md font-medium border rounded-md px-24 py-3 w-full flex items-center justify-center md:mt-4"
                   >
                     <GiPadlock className="text-[#f2f2f2]" /> Paiement
                   </button>
@@ -312,7 +322,7 @@ function Cart() {
             <br />
             <button
               type="button"
-              className="bg-[#0477bf] text-[#F2F2F2] text-[12px] font-medium border rounded-md px-24 py-3 w-full"
+              className="bg-[#0477bf] text-[#F2F2F2] text-[12px] font-medium border rounded-md px-24 py-3 w-full md:w-1/4"
               onClick={() => navigate("/signin")}
             >
               Sign In
