@@ -1,7 +1,8 @@
 ## Concept
 
-This template is meant to serve as a foundation for every P2/P3 following the React-Express-MySQL stack, as learned in Wild Code School.
+I used this template learned in Wild Code School. It following the React-Express-MySQL stack.
 It's pre-configured with a set of tools which'll help students produce industry-quality and easier-to-maintain code, while staying as simple as possible to use.
+Then thanks to @rocambille for sharing this repository template with us.
 
 ## Setup & Use
 
