@@ -4,6 +4,8 @@ I used this template learned in Wild Code School. It following the React-Express
 It's pre-configured with a set of tools which'll help students produce industry-quality and easier-to-maintain code, while staying as simple as possible to use.
 Then thanks to @rocambille for sharing this repository template with us.
 
+This project is a challenge to me. I wanted to try to rebuild an e-commerce site and as a runner I tried to reproduce the Hoka e-shop.
+
 ## Setup & Use
 
 ### Windows users
